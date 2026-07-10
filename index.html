@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brenda Avelino | Diretora de Arte & UX/UI Designer</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================
+           VARIÁVEIS & RESET
+        ========================================== */
+        :root {
+            /* Cores Base */
+            --bg-color: #F8F9FA;
+            --text-primary: #111827;
+            --text-secondary: #4B5563;
+            --white: #FFFFFF;
+            
+            /* Cores Criativas (Gradientes e Acentos) */
+            --accent-blue: #1428A0; /* Samsung Blue */
+            --accent-purple: #8B5CF6;
+            --accent-pink: #EC4899;
+            --accent-orange: #F97316;
+            
+            /* Efeitos */
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+            
+            /* Tipografia */
+            --font-heading: 'Plus Jakarta Sans', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+        }
+
+        /* ==========================================
+           BACKGROUND ANIMADO (CRIATIVIDADE)
+        ========================================== */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background: var(--bg-color);
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.6;
+            border-radius: 50%;
+            animation: float 20s infinite alternate;
+        }
+
+        .blob-1 {
+            top: -10%; left: -10%; width: 50vw; height: 50vw;
+            background: radial-gradient(circle, var(--accent-blue) 0%, rgba(20,40,160,0) 70%);
+            animation-delay: 0s;
+        }
+
+        .blob-2 {
+            bottom: -20%; right: -10%; width: 60vw; height: 60vw;
+            background: radial-gradient(circle, var(--accent-purple) 0%, rgba(139,92,246,0) 70%);
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            top: 40%; left: 40%; width: 40vw; height: 40vw;
+            background: radial-gradient(circle, var(--accent-pink) 0%, rgba(236,72,153,0) 70%);
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(5%, 10%) scale(1.1); }
+            100% { transform: translate(-5%, -5%) scale(0.9); }
+        }
+
+        /* ==========================================
+           UTILITÁRIOS & COMPONENTES
+        ========================================== */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        h1, h2, h3, h4, .brand {
+            font-family: var(--font-heading);
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 36px;
+            border-radius: 40px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 15px;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--white);
+            border: 1px solid var(--text-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .btn-outline {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            color: var(--text-primary);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .btn-outline:hover {
+            background: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .section-padding {
+            padding: 140px 0;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 24px;
+        }
+
+        /* Scroll Customizado para Landing Pages */
+        .scrollable-y {
+            overflow-y: auto;
+            overflow-x: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(20,40,160,0.5) transparent;
+        }
+        .scrollable-y::-webkit-scrollbar {
+            width: 6px;
+        }
+        .scrollable-y::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .scrollable-y::-webkit-scrollbar-thumb {
+            background-color: rgba(20,40,160,0.5);
+            border-radius: 10px;
+        }
+
+        /* Placeholders de Imagem Animados */
+        .img-placeholder {
+            background: linear-gradient(120deg, #e5e7eb 0%, #f3f4f6 50%, #e5e7eb 100%);
+            background-size: 200% 200%;
+            animation: shimmer 2s infinite linear;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            padding: 20px;
+            border-radius: inherit;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ==========================================
+           NAVEGAÇÃO
+        ========================================== */
+        header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 80px);
+            max-width: 1320px;
+            padding: 16px 32px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 40px;
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Scroll Progress */
+        .progress-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 4px; z-index: 1000;
+        }
+        .progress-bar {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-pink));
+        }
+
+        /* ==========================================
+           HERO SECTION
+        ========================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(50px, 5vw, 80px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .hero-roles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .role-tag {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.05);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            color: var(--accent-blue);
+        }
+
+        .hero-bio {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 90%;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .hero-image {
+            position: relative;
+            border-radius: 32px;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            transform: rotate(2deg);
+            transition: var(--transition);
+        }
+
+        .hero-image:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        /* ==========================================
+           TIMELINE / ÁREAS (ESTILO BENTO GRID)
+        ========================================== */
+        .timeline-section {
+            padding: 100px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .timeline-title {
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .bento-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .bento-item {
+            padding: 24px 32px;
+            border-radius: 20px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 18px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .bento-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: var(--white);
+        }
+
+        /* ==========================================
+           CASES DE DESTAQUE
+        ========================================== */
+        .cases-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 100px;
+        }
+
+        .cases-intro h2 { font-size: 56px; margin-bottom: 24px; }
+        .cases-intro p { font-size: 20px; color: var(--text-secondary); }
+
+        .project {
+            margin-bottom: 140px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .project:nth-child(even) .project-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .project:nth-child(even) .project-visual { order: 2; }
+        .project:nth-child(even) .project-info { order: 1; }
+
+        .project-visual {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            aspect-ratio: 4/3;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .project-visual:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .project-visual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            height: 100%;
+        }
+        
+        .project-visual-grid > div {
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .project-meta {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(20,40,160,0.1), rgba(139,92,246,0.1));
+            color: var(--accent-blue);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .project-title { font-size: 40px; margin-bottom: 20px; line-height: 1.2; }
+        .project-desc { font-size: 18px; color: var(--text-secondary); margin-bottom: 32px; }
+
+        .project-bullets {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .project-bullets li {
+            position: relative;
+            padding-left: 32px;
+            margin-bottom: 16px;
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+
+        .project-bullets li::before {
+            content: '\f061'; /* FontAwesome arrow-right */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--accent-purple);
+            font-size: 14px;
+        }
+
+        .project-link {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .project-link:hover {
+            color: var(--accent-purple);
+            border-bottom-color: var(--accent-purple);
+            gap: 12px;
+        }
+
+        /* ==========================================
+           FOOTER / CONTATO
+        ========================================== */
+        footer {
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-card {
+            padding: 80px 40px;
+            border-radius: 40px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4));
+        }
+
+        .footer-title { font-size: 56px; margin-bottom: 20px; }
+        .footer-desc { font-size: 20px; color: var(--text-secondary); margin-bottom: 40px; }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: var(--white);
+            border-radius: 40px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--text-primary);
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .contact-pill:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            color: var(--accent-blue);
+        }
+
+        /* ==========================================
+           ANIMAÇÕES REVEAL
+        ========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==========================================
+           RESPONSIVIDADE
+        ========================================== */
+        @media (max-width: 1024px) {
+            .hero-grid, .project-grid, .project:nth-child(even) .project-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .project:nth-child(even) .project-visual,
+            .project:nth-child(even) .project-info {
+                order: initial;
+            }
+            .hero-image { max-width: 500px; margin: 0 auto; }
+        }
+
+        @media (max-width: 768px) {
+            header { width: calc(100% - 40px); padding: 16px 24px; }
+            .hero-content h1 { font-size: 44px; }
+            .cases-intro h2, .footer-title { font-size: 40px; }
+            .contact-info { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fundo Criativo Animado -->
+    <div class="ambient-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Barra de Progresso de Scroll -->
+    <div class="progress-container">
+        <div class="progress-bar" id="myBar"></div>
+    </div>
+
+    <!-- Header Glassmorphism -->
+    <header class="glass-panel">
+        <a href="#" class="brand">Brenda Avelino</a>
+        <nav class="nav-links">
+            <a href="#cases">Cases</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero container">
+        <div class="hero-grid">
+            <div class="hero-content reveal">
+                <h1>Transformando <br><span class="text-gradient">Estratégia</span> em <br>Experiência.</h1>
+                
+                <div class="hero-roles">
+                    <span class="role-tag">Diretora de Arte</span>
+                    <span class="role-tag">UX/UI Designer</span>
+                    <span class="role-tag">CRM</span>
+                </div>
+                
+                <p class="hero-bio">
+                    Há mais de 9 anos transformo estratégias de comunicação em experiências digitais que unem criatividade, usabilidade e objetivos de negócio. Atualmente atuo na Samsung Brasil desenvolvendo Landing Pages, experiências de produto e soluções digitais para a área de Dotcom.
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="#cases" class="btn btn-primary">Ver Projetos <i class="fa-solid fa-arrow-down"></i></a>
+                    <a href="#" class="btn btn-outline">LinkedIn <i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="hero-image reveal" style="transition-delay: 0.2s;">
+                <img src="IMAGEM 1.png" alt="Brenda Avelino" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Áreas de Atuação (Bento Grid) -->
+    <section class="timeline-section container">
+        <h2 class="timeline-title reveal">Áreas de <span class="text-gradient">Atuação</span></h2>
+        <div class="bento-grid reveal">
+            <div class="glass-panel bento-item">UX/UI Design</div>
+            <div class="glass-panel bento-item">Direção de Arte</div>
+            <div class="glass-panel bento-item">CRM</div>
+            <div class="glass-panel bento-item">Visual Merchandising</div>
+            <div class="glass-panel bento-item">Criação Editorial</div>
+            <div class="glass-panel bento-item">Treinamento e Eventos Corporativos</div>
+        </div>
+    </section>
+
+    <!-- Cases / Projetos -->
+    <section id="cases" class="section-padding">
+        <div class="container">
+            
+            <div class="cases-intro reveal">
+                <h2>Cases em <span class="text-gradient">Destaque</span></h2>
+                <p>Projetos desenvolvidos na interseção entre Direção de Arte, UX/UI, Visual Merchandising, eventos imersivos, CRM, Treinamentos corporativos, Design editorial e Produtos digitais.</p>
+            </div>
+
+            <!-- Case 01: Odyssey Cup -->
+            <div class="project reveal">
+                <div class="project-grid">
+                    <div class="project-visual scrollable-y">
+                        <img src="IMAGEM 2.jpg" alt="Landing Page Odyssey Cup" style="width: 100%; height: auto; display: block;">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-meta">UX e UI Design</span>
+                        <h3 class="project-title">Landing Page Odyssey Cup</h3>
+                        <p class="project-desc">O desafio era construir uma LP para o Campeonato Odyssey CUP na Samsung, porém com um layout direcionado para mobile afinal o principal publico acessa dessa forma.</p>
+                        <ul class="project-bullets">
+                            <li>Apresentar uma pagina imersiva e atrativa para o público ainda seguindo as diretrizes do padrão visual da Samsung.</li>
+                            <li>Priorizar a navegação intuitiva e fluida para atrair o publico para o campeonato.</li>
+                        </ul>
+                        <a href="https://www.samsung.com/br/campaign/odyssey-cu" target="_blank" class="project-link">Acessar a página <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case 02: Multi Split -->
+            <div class="project reveal">
+                <div class="project-grid">
+                    <div class="project-visual scrollable-y">
+                        <img src="IMAGEM 3.jpg" alt="Landing Page Multi Split Parte 1" style="width: 100%; height: auto; display: block;">
+                        <img src="IMAGEM 4.jpg" alt="Landing Page Multi Split Parte 2" style="width: 100%; height: auto; display: block;">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-meta">UX e UI Design</span>
+                        <h3 class="project-title">Landing Page Multi Split</h3>
+                        <p class="project-desc">O desafio era construir uma LP sobre o produto AC Multi Split que precisava ser apresentado de forma clara as possibilidades de contar com uma condensadora para até 5 ambientes.</p>
+                        <ul class="project-bullets">
+                            <li>Apresentar uma pagina visualmente explicativa e clara ainda seguindo as diretrizes do padrão visual da Samsung.</li>
+                            <li>Pesquisando o mercado percebi certa desatenção com a forma de apresentar o Multi Split e também a oportunidade de trazer um visual mais harmônico e auto explicativo.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case 03: Treinamento Corporativo (NOVO) -->
+            <div class="project reveal">
+                <div class="project-grid">
+                    <div class="project-visual">
+                        <img src="IMAGEM 8.jpg" alt="Treinamento Mensal de TVs" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-meta">Treinamento corporativo</span>
+                        <h3 class="project-title">Comunicação de eventos corporativos</h3>
+                        <p class="project-desc">Desenvolvi toda parte visual e materiais de comunicação para treinamentos e eventos corporativos, utilizando recursos gráficos, narrativas visuais e princípios de design da informação para tornar os conteúdos mais claros, atrativos e memoráveis.</p>
+                        <ul class="project-bullets">
+                            <li>As entregas contemplaram comunicações pré-evento, materiais de apoio, apresentações e peças de engajamento ao longo da jornada de aprendizagem.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case 04: Converse -->
+            <div class="project reveal">
+                <div class="project-grid">
+                    <div class="project-visual">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; height: 100%;">
+                            <img src="IMAGEM 9.jpeg" alt="Converse Vitrine 1" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;">
+                            <img src="IMAGEM 10.jpeg" alt="Converse Vitrine 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;">
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-meta">Visual Merchandising</span>
+                        <h3 class="project-title">Converse</h3>
+                        <p class="project-desc">Direção de arte voltada para o espaço físico e vitrinismo, traduzindo o posicionamento global da marca para a cultura urbana local.</p>
+                        <ul class="project-bullets">
+                            <li>Criação de campanhas visuais que garantem o destaque dos produtos (footwear) mantendo a essência jovem, rebelde e autêntica da Converse em cada ponto de contato.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case 05: CRM Samsung -->
+            <div class="project reveal">
+                <div class="project-grid">
+                    <div class="project-visual">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; height: 100%; padding: 12px; background: #fff;">
+                            <img src="IMAGEM 5.jpg" alt="CRM SmartThings" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                            <img src="IMAGEM 6.jpg" alt="CRM The Frame" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                            <img src="IMAGEM 7.jpg" alt="CRM Music Frame" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-meta">CRM</span>
+                        <h3 class="project-title">Samsung Push notification e E-mail Marketing</h3>
+                        <p class="project-desc">Estratégia e design voltados para relacionamento direto com o usuário final através de múltiplos canais.</p>
+                        <ul class="project-bullets">
+                            <li>Desenvolver uma comunicação personalizada e consistente para diferentes momentos da jornada do consumidor, traduzindo campanhas e lançamentos de produtos Samsung em experiências digitais relevantes.</li>
+                            <li>Criar peças escaláveis para múltiplos canais de CRM, garantindo coerência visual, adaptação para diferentes formatos e uma experiência fluida entre os pontos de contato da marca.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case 06: Editorial -->
+            <div class="project reveal">
+                <div class="project-grid">
+                    <div class="project-visual">
+                        <div class="img-placeholder">
+                            [Imagem 6 - Revistas Impressas]
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-meta">Criação Editorial</span>
+                        <h3 class="project-title">Publicidade em revistas impressas</h3>
+                        <p class="project-desc">Direção de arte e layout focados no formato físico tradicional.</p>
+                        <ul class="project-bullets">
+                            <li>Desenvolver anúncios e conteúdos editoriais que integrassem identidade visual, mensagem de marca e experiência de leitura, respeitando as características e limitações do meio impresso.</li>
+                            <li>Criar peças visualmente atrativas que se destacassem em meio ao ambiente editorial, organizando informações de forma estratégica e garantindo equilíbrio entre imagem, texto e identidade da marca.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer / Contato -->
+    <footer id="contato" class="container reveal">
+        <div class="footer-card glass-panel">
+            <h2 class="footer-title">Vamos <span class="text-gradient">conversar?</span></h2>
+            <p class="footer-desc">Obrigada por acompanhar minha jornada e meus projetos até aqui.</p>
+            
+            <div class="contact-info">
+                <a href="tel:+5511943276959" class="contact-pill">
+                    <i class="fa-brands fa-whatsapp text-gradient"></i> (11) 9 4327-6959
+                </a>
+                <a href="mailto:brendaavelinoesteves@gmail.com" class="contact-pill">
+                    <i class="fa-regular fa-envelope text-gradient"></i> brendaavelinoesteves@gmail.com
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts (Animações Reveal e Scroll) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animação de Reveal (Fade-up) ao fazer scroll
+            const reveals = document.querySelectorAll('.reveal');
+
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 100;
+
+                reveals.forEach(reveal => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll(); // Dispara na carga inicial
+
+            // Barra de Progresso no topo
+            window.onscroll = function() {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                document.getElementById("myBar").style.width = scrolled + "%";
+            };
+        });
+    </script>
+</body>
+</html>
